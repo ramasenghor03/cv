@@ -218,15 +218,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const form = document.getElementById("contact-form");
   const CONTACT_EMAIL = "rmtlsnghr@gmail.com";
-  // Clé de formulaire de contact sur https://web3forms.com pour mon email
   const WEB3FORMS_ACCESS_KEY = "bcb77325-df48-4429-863c-3ef03d4bef12";
 
   if (form) {
-    const web3formsKeyInput = document.getElementById("web3forms-key");
-    if (web3formsKeyInput && WEB3FORMS_ACCESS_KEY) {
-      web3formsKeyInput.value = WEB3FORMS_ACCESS_KEY;
-    }
-
     const nom = document.getElementById("contact-nom");
     const email = document.getElementById("contact-email");
     const message = document.getElementById("contact-message");
@@ -316,66 +310,51 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      if (WEB3FORMS_ACCESS_KEY) {
-        submitBtn.disabled = true;
-
-        fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_ACCESS_KEY,
-            name: nom.value.trim(),
-            email: email.value.trim(),
-            message: message.value.trim(),
-            subject: "Contact CV - " + nom.value.trim(),
-          }),
-        })
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            if (data.success) {
-              successMsg.textContent =
-                "Message envoyé avec succès ! Je vous répondrai bientôt.";
-              form.reset();
-            } else {
-              successMsg.textContent =
-                "Envoi impossible pour le moment. Écrivez à " +
-                CONTACT_EMAIL +
-                ".";
-            }
-          })
-          .catch(function () {
-            successMsg.textContent =
-              "Erreur réseau. Écrivez directement à " + CONTACT_EMAIL + ".";
-          })
-          .finally(function () {
-            submitBtn.disabled = false;
-          });
-
+      if (!WEB3FORMS_ACCESS_KEY) {
+        successMsg.textContent =
+          "Formulaire non configuré. Écrivez-moi à " + CONTACT_EMAIL + ".";
         return;
       }
 
-      const subject = encodeURIComponent("Contact CV - " + nom.value.trim());
-      const body = encodeURIComponent(
-        "Nom : " +
-          nom.value.trim() +
-          "\n" +
-          "E-mail : " +
-          email.value.trim() +
-          "\n\n" +
-          message.value.trim(),
-      );
+      submitBtn.disabled = true;
+      successMsg.textContent = "Envoi en cours...";
 
-      window.location.href =
-        "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
-
-      successMsg.textContent =
-        "Votre client de messagerie va s'ouvrir. Pour un envoi direct, configurez Web3Forms dans script.js.";
-      form.reset();
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: nom.value.trim(),
+          email: email.value.trim(),
+          message: message.value.trim(),
+          subject: "Contact CV - " + nom.value.trim(),
+          from_name: "CV Ramatoulaye Senghor",
+        }),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          if (data.success) {
+            successMsg.textContent =
+              "Message envoyé avec succès ! Je vous répondrai bientôt.";
+            form.reset();
+          } else {
+            successMsg.textContent =
+              data.message ||
+              "Envoi impossible. Réessayez ou écrivez à " + CONTACT_EMAIL + ".";
+          }
+        })
+        .catch(function () {
+          successMsg.textContent =
+            "Erreur de connexion. Réessayez ou écrivez à " + CONTACT_EMAIL + ".";
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+        });
     });
   }
 });
