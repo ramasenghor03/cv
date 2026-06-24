@@ -2,6 +2,12 @@
 
 Curriculum vitae interactif réalisé en HTML, CSS et JavaScript pur (Vanilla JS) dans le cadre du cours de Développement Web 1 - Licence 2 Informatique, Université Iba Der Thiam de Thiès.
 
+## Voir le CV en ligne
+
+**[https://ramasenghor03.github.io/cv/](https://ramasenghor03.github.io/cv/)**
+
+Ouvrez ce lien dans votre navigateur pour visualiser le résultat final du projet.
+
 ## Technologies utilisées
 
 - **HTML5** : structure sémantique avec balises `header`, `nav`, `main`, `section`, `article`, `footer`

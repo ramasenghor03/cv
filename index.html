@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,6 +18,7 @@
     />
   </head>
   <body>
+    <!-- Boutons fixes : thème et retour en haut -->
     <button id="theme-toggle" aria-label="Basculer le thème">
       <i class="fas fa-moon" id="theme-icon"></i>
     </button>
@@ -26,6 +27,7 @@
       <i class="fas fa-chevron-up"></i>
     </button>
 
+    <!-- Navigation mobile (visible sur petits écrans) -->
     <div
       class="mobile-nav-overlay"
       id="mobile-nav-overlay"
@@ -48,6 +50,7 @@
     </header>
 
     <div class="cv-wrapper">
+      <!-- Colonne latérale : en-tête, navigation, contact, centres d'intérêt -->
       <aside class="sidebar">
         <div class="sidebar-header" id="page-top">
           <div class="sidebar-photo">
@@ -152,7 +155,9 @@
         </div>
       </aside>
 
+      <!-- Contenu principal du CV -->
       <main class="main-content">
+        <!-- Section À propos -->
         <section id="about" aria-labelledby="about-title">
           <h2 id="about-title">À propos</h2>
           <p>
@@ -165,6 +170,7 @@
           </p>
         </section>
 
+        <!-- Section Formation -->
         <section id="formation" aria-labelledby="formation-title">
           <h2 id="formation-title">Formation</h2>
 
@@ -213,6 +219,7 @@
           </article>
         </section>
 
+        <!-- Section Compétences (techniques + transversales) -->
         <section id="competences" aria-labelledby="competences-title">
           <h2 id="competences-title">Compétences</h2>
 
@@ -387,6 +394,7 @@
           </div>
         </section>
 
+        <!-- Section Expériences -->
         <section id="experiences" aria-labelledby="experiences-title">
           <h2 id="experiences-title">Expériences</h2>
 
@@ -415,6 +423,7 @@
           </div>
         </section>
 
+        <!-- Section Projets réalisés -->
         <section id="projets" aria-labelledby="projets-title">
           <h2 id="projets-title">Projets réalisés</h2>
 
@@ -468,6 +477,7 @@
           </article>
         </section>
 
+        <!-- Section Langues -->
         <section id="langues" aria-labelledby="langues-title">
           <h2 id="langues-title">Langues</h2>
 
@@ -493,6 +503,7 @@
           </ul>
         </section>
 
+        <!-- Section Contact : formulaire validé en JavaScript (script.js) -->
         <section id="contact" aria-labelledby="contact-title">
           <h2 id="contact-title">Contact</h2>
           <p>
@@ -565,6 +576,7 @@
       </main>
     </div>
 
+    <!-- Pied de page : mentions et réseaux sociaux -->
     <footer>
       <p>Ramatoulaye Senghor &copy; 2026</p>
       <div class="footer-links">
